@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Event implements Listener {
 
 
+	@SuppressWarnings("deprecation")
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onPlayeruse(PlayerInteractEvent event) {
 		if ((event instanceof PlayerInteractEvent))
@@ -37,6 +38,7 @@ public class Event implements Listener {
 						}
 						event.setCancelled(true);
 						player.sendMessage(ChatColor.RED + "You don't have Permission!");
+						player.updateInventory();
 						return;
 
 					}
