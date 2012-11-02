@@ -14,12 +14,13 @@ public class Main extends JavaPlugin
 
 	
 	Logger logger = Logger.getLogger("Minecraft");
-	public String Msg;
-	public boolean AllowOP;
+	public static String Msg;
+	public static boolean AllowOP;
 
 
 	public void onEnable()
 	{
+		
 		PluginDescriptionFile pdfFile = getDescription();
 		this.logger.info(pdfFile.getName() + "version" + pdfFile.getVersion() + " is Enabled");
 		getServer().getPluginManager().registerEvents(new Event(), this);
