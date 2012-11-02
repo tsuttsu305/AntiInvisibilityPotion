@@ -1,3 +1,4 @@
+//作者: tsuttsu305
 package tsuttsu305.Main;
 
 import java.util.logging.Logger;
