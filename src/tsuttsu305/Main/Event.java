@@ -45,8 +45,8 @@ public class Event implements Listener {
 			}
 		}
 	}
-	
-	
+
+
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onDispense(BlockDispenseEvent event){
 		if (event instanceof BlockDispenseEvent){
@@ -63,7 +63,7 @@ public class Event implements Listener {
 				if (poet == PotionEffectType.INVISIBILITY){
 					BDE.setCancelled(true);
 					return;
-					
+
 
 
 				}
