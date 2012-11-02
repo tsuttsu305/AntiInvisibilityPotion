@@ -1,0 +1,5 @@
+#Potion use Block Msg...String
+BlockMsg: "You don't have Permission!"
+
+#Allow use of OP...true/false
+AllowOP: true

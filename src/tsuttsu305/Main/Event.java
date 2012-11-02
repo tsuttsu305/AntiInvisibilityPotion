@@ -13,10 +13,13 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
 public class Event implements Listener {
+	
+	
 
 
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onPlayeruse(PlayerInteractEvent event) {
+		Main Main = new Main();
 		if ((event instanceof PlayerInteractEvent))
 		{
 			PlayerInteractEvent aaaa = event;
@@ -32,13 +35,37 @@ public class Event implements Listener {
 					PotionEffectType poet = po.getType().getEffectType();
 
 					if (poet == PotionEffectType.INVISIBILITY){
-						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
+						
+						//Alllow op true
+						if (Main.AllowOP){
+							if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
+								return;
+							}else{
+							event.setCancelled(true);
+							
+							
+							player.sendMessage(ChatColor.RED + Main.Msg);
+							
 							return;
+							}
+														
 						}
-						event.setCancelled(true);
-						player.sendMessage(ChatColor.RED + "You don't have Permission!");
-						return;
-
+						else //Allow OP false
+						{
+							if ((player.hasPermission("invisibility.on"))) {
+								return;
+							}else{
+							event.setCancelled(true);
+							
+							
+							player.sendMessage(ChatColor.RED + Main.Msg);
+							
+							return;
+							}
+							
+						}
+						
+						
 					}
 				}
 				return;
