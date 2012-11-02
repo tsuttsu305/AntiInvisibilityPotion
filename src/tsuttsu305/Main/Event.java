@@ -13,13 +13,10 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 
 public class Event implements Listener {
-	
-	
 
 
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onPlayeruse(PlayerInteractEvent event) {
-		
 		if ((event instanceof PlayerInteractEvent))
 		{
 			PlayerInteractEvent aaaa = event;
@@ -35,45 +32,23 @@ public class Event implements Listener {
 					PotionEffectType poet = po.getType().getEffectType();
 
 					if (poet == PotionEffectType.INVISIBILITY){
-						
-						//Alllow op true
-						if (Main.AllowOP){
-							if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
-								return;
-							}else{
-							event.setCancelled(true);
-							
-							
-							player.sendMessage(ChatColor.RED + Main.Msg);
-							
+						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
 							return;
-							}
-														
 						}
-						else //Allow OP false
-						{
-							if ((player.hasPermission("invisibility.on"))) {
-								return;
-							}else{
-							event.setCancelled(true);
-							
-							
-							player.sendMessage(ChatColor.RED + Main.Msg);
-							
-							return;
-							}
-							
-						}
-						
-						
+						event.setCancelled(true);
+						player.sendMessage(ChatColor.RED + "You don't have Permission!");
+						return;
+
 					}
+
 				}
+
 				return;
 			}
 		}
 	}
-
-
+	
+	
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onDispense(BlockDispenseEvent event){
 		if (event instanceof BlockDispenseEvent){
@@ -90,13 +65,17 @@ public class Event implements Listener {
 				if (poet == PotionEffectType.INVISIBILITY){
 					BDE.setCancelled(true);
 					return;
-
+					
 
 
 				}
 			}
+
 		}
+
+
 	}
+
 }
 
 
