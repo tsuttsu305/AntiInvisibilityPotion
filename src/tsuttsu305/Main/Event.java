@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -20,8 +21,8 @@ public class Event implements Listener {
 	public void onPlayeruse(PlayerInteractEvent event) {
 		if ((event instanceof PlayerInteractEvent))
 		{
-			
-			
+
+
 			PlayerInteractEvent aaaa = event;
 			if (aaaa.useItemInHand() != null) {
 				Player player = aaaa.getPlayer();
@@ -38,13 +39,49 @@ public class Event implements Listener {
 						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
 							return;
 						}
-						
-						event.setCancelled(true);
-						
-						player.sendMessage(ChatColor.RED + "You don't have Permission!");
-						player.updateInventory();
-						return;
 
+						if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
+							Material bl = event.getClickedBlock().getType();
+							if (bl == Material.CHEST){
+								event.setCancelled(true);
+
+								player.sendMessage(ChatColor.RED + "You may not open a container with an invisibility potion!");
+								player.updateInventory();
+								return;
+							}else if (bl == Material.DISPENSER){
+								event.setCancelled(true);
+
+								player.sendMessage(ChatColor.RED + "You may not open a dispenser with an invisibility potion!");
+								player.updateInventory();
+								return;
+							}else if (bl == Material.STONE_BUTTON || bl == Material.WOOD_BUTTON || bl == Material.LEVER){
+								event.setCancelled(true);
+
+								player.sendMessage(ChatColor.RED + "You cannot use button and lever. You have invisibility potion!");
+								player.updateInventory();
+								return;
+
+							}else if (bl == Material.FURNACE) {
+								event.setCancelled(true);
+
+								player.sendMessage(ChatColor.RED + "You may not open a furnace with an invisibility potion!");
+								player.updateInventory();
+								return;
+
+							}
+
+							event.setCancelled(true);
+
+							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
+							player.updateInventory();
+							return;
+
+						}else if ( event.getAction() == Action.RIGHT_CLICK_AIR){
+							event.setCancelled(true);
+
+							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
+							player.updateInventory();
+							return;
 					}
 
 				}
@@ -53,8 +90,8 @@ public class Event implements Listener {
 			}
 		}
 	}
-	
-	
+}
+
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onDispense(BlockDispenseEvent event){
 		if (event instanceof BlockDispenseEvent){
@@ -71,7 +108,7 @@ public class Event implements Listener {
 				if (poet == PotionEffectType.INVISIBILITY){
 					BDE.setCancelled(true);
 					return;
-					
+
 
 
 				}
