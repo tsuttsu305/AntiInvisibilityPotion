@@ -9,7 +9,7 @@ public class Main extends JavaPlugin
 {
 	public static Main plugin;
 	
-	public static String Msg;
+	//public static String Msg;
 	
 	
 	Logger logger = Logger.getLogger("Minecraft");
