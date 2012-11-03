@@ -20,6 +20,8 @@ public class Event implements Listener {
 	public void onPlayeruse(PlayerInteractEvent event) {
 		if ((event instanceof PlayerInteractEvent))
 		{
+			
+			
 			PlayerInteractEvent aaaa = event;
 			if (aaaa.useItemInHand() != null) {
 				Player player = aaaa.getPlayer();
@@ -36,7 +38,9 @@ public class Event implements Listener {
 						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
 							return;
 						}
+						
 						event.setCancelled(true);
+						
 						player.sendMessage(ChatColor.RED + "You don't have Permission!");
 						player.updateInventory();
 						return;
