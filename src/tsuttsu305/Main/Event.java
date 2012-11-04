@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Event implements Listener {
 
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation" })
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onPlayeruse(PlayerInteractEvent event) {
 		if ((event instanceof PlayerInteractEvent))
@@ -31,9 +31,35 @@ public class Event implements Listener {
 
 				if (abc == Material.POTION)
 				{
-					Potion po = Potion.fromItemStack(it);
 
-					PotionEffectType poet = po.getType().getEffectType();
+
+
+					Potion po;
+					//NoEffects Potion Avoid errors
+					try {
+						po = Potion.fromItemStack(it);
+					} catch (Exception e) {
+						// TODO: handle exception
+						
+						
+						return;
+					}
+
+
+
+
+
+
+					PotionEffectType poet;
+					//NoEffects Potion Avoid errors
+					try {
+						poet = po.getType().getEffectType();
+					} catch (Exception e) {
+						// TODO: handle exception
+						return;
+					}
+
+
 
 					if (poet == PotionEffectType.INVISIBILITY){
 						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
