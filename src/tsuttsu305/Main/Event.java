@@ -68,13 +68,13 @@ public class Event implements Listener {
 								player.updateInventory();
 								return;
 
-							}
-
+							}else{
 							event.setCancelled(true);
 
 							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
 							player.updateInventory();
 							return;
+							}
 
 						}else if ( event.getAction() == Action.RIGHT_CLICK_AIR){
 							event.setCancelled(true);
