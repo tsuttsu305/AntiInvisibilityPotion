@@ -21,34 +21,22 @@ public class Event implements Listener {
 	public void onPlayeruse(PlayerInteractEvent event) {
 		if ((event instanceof PlayerInteractEvent))
 		{
-
-
-			PlayerInteractEvent aaaa = event;
-			if (aaaa.useItemInHand() != null) {
-				Player player = aaaa.getPlayer();
+			//PlayerInteractEvent aaaa = event;
+			if (event.useItemInHand() != null) {
+				Player player = event.getPlayer();
 				ItemStack it = player.getItemInHand();
 				Material abc = it.getType();
 
 				if (abc == Material.POTION)
 				{
-
-
-
 					Potion po;
 					//NoEffects Potion Avoid errors
 					try {
 						po = Potion.fromItemStack(it);
 					} catch (Exception e) {
 						// TODO: handle exception
-
-
 						return;
 					}
-
-
-
-
-
 
 					PotionEffectType poet;
 					//NoEffects Potion Avoid errors
@@ -59,64 +47,40 @@ public class Event implements Listener {
 						return;
 					}
 
-
-
 					if (poet == PotionEffectType.INVISIBILITY){
 						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
 							return;
 						}
 
 						if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
-							Material bl = event.getClickedBlock().getType();
-							if (bl == Material.CHEST){
-								event.setCancelled(true);
+							switch (event.getClickedBlock().getType()){
+								case CHEST:
+								case DISPENSER:
+								case STONE_BUTTON:
+								case WOOD_BUTTON:
+								case LEVER:
+								case FURNACE:
+									player.sendMessage(ChatColor.RED + "You may not use this block with an invisibility potion!");
+									break;
 
-								player.sendMessage(ChatColor.RED + "You may not open a container with an invisibility potion!");
-								player.updateInventory();
-								return;
-							}else if (bl == Material.DISPENSER){
-								event.setCancelled(true);
-
-								player.sendMessage(ChatColor.RED + "You may not open a dispenser with an invisibility potion!");
-								player.updateInventory();
-								return;
-							}else if (bl == Material.STONE_BUTTON || bl == Material.WOOD_BUTTON || bl == Material.LEVER){
-								event.setCancelled(true);
-
-								player.sendMessage(ChatColor.RED + "You cannot use button and lever. You have invisibility potion!");
-								player.updateInventory();
-								return;
-
-							}else if (bl == Material.FURNACE) {
-								event.setCancelled(true);
-
-								player.sendMessage(ChatColor.RED + "You may not open a furnace with an invisibility potion!");
-								player.updateInventory();
-								return;
-
-							}else{
-								event.setCancelled(true);
-
-								player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
-								player.updateInventory();
-								return;
+								default:
+									player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
+									break;
 							}
-
-						}else if ( event.getAction() == Action.RIGHT_CLICK_AIR){
-							event.setCancelled(true);
-
+						}
+						else if ( event.getAction() == Action.RIGHT_CLICK_AIR){
 							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
-							player.updateInventory();
-							return;
 						}
 
+						event.setCancelled(true);
+						player.updateInventory();
 					}
-
-					return;
 				}
+				return;
 			}
 		}
 	}
+
 
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onDispense(BlockDispenseEvent event){
@@ -146,7 +110,6 @@ public class Event implements Listener {
 	}
 
 }
-
 
 
 
