@@ -40,8 +40,8 @@ public class Event implements Listener {
 						po = Potion.fromItemStack(it);
 					} catch (Exception e) {
 						// TODO: handle exception
-						
-						
+
+
 						return;
 					}
 
@@ -95,11 +95,11 @@ public class Event implements Listener {
 								return;
 
 							}else{
-							event.setCancelled(true);
+								event.setCancelled(true);
 
-							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
-							player.updateInventory();
-							return;
+								player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
+								player.updateInventory();
+								return;
 							}
 
 						}else if ( event.getAction() == Action.RIGHT_CLICK_AIR){
@@ -108,15 +108,15 @@ public class Event implements Listener {
 							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
 							player.updateInventory();
 							return;
+						}
+
 					}
 
+					return;
 				}
-
-				return;
 			}
 		}
 	}
-}
 
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onDispense(BlockDispenseEvent event){
