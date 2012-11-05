@@ -24,30 +24,30 @@ public class Event implements Listener {
 			//PlayerInteractEvent aaaa = event;
 			if (event.useItemInHand() != null) {
 				Player player = event.getPlayer();
-				ItemStack it = player.getItemInHand();
-				Material abc = it.getType();
+				ItemStack playerInHand = player.getItemInHand();
+				Material playerInMate = playerInHand.getType();
 
-				if (abc == Material.POTION)
+				if (playerInMate == Material.POTION)
 				{
 					Potion po;
 					//NoEffects Potion Avoid errors
 					try {
-						po = Potion.fromItemStack(it);
+						po = Potion.fromItemStack(playerInHand);
 					} catch (Exception e) {
 						// TODO: handle exception
 						return;
 					}
 
-					PotionEffectType poet;
+					PotionEffectType poEType;
 					//NoEffects Potion Avoid errors
 					try {
-						poet = po.getType().getEffectType();
+						poEType = po.getType().getEffectType();
 					} catch (Exception e) {
 						// TODO: handle exception
 						return;
 					}
 
-					if (poet == PotionEffectType.INVISIBILITY){
+					if (poEType == PotionEffectType.INVISIBILITY){
 						if ((player.hasPermission("invisibility.on")) || (player.isOp())) {
 							return;
 						}
