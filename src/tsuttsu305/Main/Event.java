@@ -52,6 +52,7 @@ public class Event implements Listener {
 							return;
 						}
 
+						//メッセージはconfigから呼び出し。
 						if (event.getAction() == Action.RIGHT_CLICK_BLOCK){
 							switch (event.getClickedBlock().getType()){
 								case CHEST:
@@ -60,16 +61,16 @@ public class Event implements Listener {
 								case WOOD_BUTTON:
 								case LEVER:
 								case FURNACE:
-									player.sendMessage(ChatColor.RED + "You may not use this block with an invisibility potion!");
+									player.sendMessage(ChatColor.RED + Main.err_msg);
 									break;
 
 								default:
-									player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
+									player.sendMessage(ChatColor.RED + Main.msg);
 									break;
 							}
 						}
 						else if ( event.getAction() == Action.RIGHT_CLICK_AIR){
-							player.sendMessage(ChatColor.RED + "You don't have Permission to use this Potion!");
+							player.sendMessage(ChatColor.RED + Main.msg);
 						}
 
 						event.setCancelled(true);

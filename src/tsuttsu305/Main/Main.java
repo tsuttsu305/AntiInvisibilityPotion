@@ -8,8 +8,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin
 {
 	public static Main plugin;
-	
-	//public static String Msg;
+	//msgはAir右クリック使用時
+	//err_msgはブロックを使おうとしたけどできなかった時
+	public static String msg, err_msg;
 	
 	
 	Logger logger = Logger.getLogger("Minecraft");
@@ -19,11 +20,14 @@ public class Main extends JavaPlugin
 		PluginDescriptionFile pdfFile = getDescription();
 		this.logger.info(pdfFile.getName() + "version" + pdfFile.getVersion() + " is Enabled");
 		getServer().getPluginManager().registerEvents(new Event(), this);
-		/*
+		
+		//config系
 		getConfig().options().copyDefaults(true);
 		saveConfig();
-		ConfigLoad();
-		*/
+		msg = getConfig().getString("block_potion_use");
+		err_msg = getConfig().getString("block_use_error");
+		
+		
 		
 	}
 
@@ -32,12 +36,7 @@ public class Main extends JavaPlugin
 		PluginDescriptionFile pdfFile = getDescription();
 		this.logger.info(pdfFile.getName() + "version" + pdfFile.getVersion() + " is Disabled");
 	}
-	/*
-	public void ConfigLoad(){
-		Msg = this.getConfig().getString("BlockMessage");
-		return;
-	}
-	*/
+
 	
 
 	
