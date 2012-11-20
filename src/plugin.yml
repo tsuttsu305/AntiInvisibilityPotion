@@ -1,5 +1,5 @@
 name: AntiInvisibilityPotion
 author: tsuttsu305
-main: tsuttsu305.Main.Main
-version: 1.30
+main: tsuttsu305.AntiInvisibilityPotion.Main
+version: 1.35
 permission: invisibility.on
