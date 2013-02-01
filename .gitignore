@@ -5,3 +5,4 @@
 /dist
 build.xml
 manifest.mf
+/target
